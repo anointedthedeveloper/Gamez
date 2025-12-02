@@ -1,0 +1,143 @@
+/* ==========================================================================
+   CONTENT STYLES (style.css) - New File
+   Handles: Logo, Text, Buttons, and Dynamic Effects
+   (Relies on :root color variables from background.css)
+   ========================================================================== */
+
+/* 1. Logo Styling and Lightning Animation */
+.content .main-logo {
+    max-width: 90%;
+    width: 500px; 
+    height: auto;
+    margin-bottom: 20px;
+    
+    /* Apply initial glow and the lightning animation */
+    filter: drop-shadow(0 0 15px var(--color-neon-blue)) drop-shadow(0 0 5px var(--color-bright-yellow));
+    animation: lightningFlicker 4s linear infinite;
+}
+
+@keyframes lightningFlicker {
+    0%, 100% {
+        /* Default state: Blue/Yellow Glow */
+        filter: drop-shadow(0 0 15px var(--color-neon-blue)) drop-shadow(0 0 5px var(--color-bright-yellow));
+    }
+    5% {
+        /* Brief flash 1: Electric Blue dominance */
+        filter: drop-shadow(0 0 5px var(--color-electric-blue)) drop-shadow(0 0 2px var(--color-lime-yellow));
+    }
+    10% {
+        /* Brief flash 2: Intense wide glow */
+        filter: drop-shadow(0 0 25px var(--color-neon-blue)) drop-shadow(0 0 10px var(--color-bright-yellow));
+    }
+    11% {
+        /* Very brief flicker-off */
+        filter: none; 
+    }
+    12% {
+        /* Quick recovery flash */
+        filter: drop-shadow(0 0 10px var(--color-neon-blue));
+    }
+    /* Slower return to normal, simulating idle energy */
+    15%, 85% {
+        filter: drop-shadow(0 0 15px var(--color-neon-blue)) drop-shadow(0 0 5px var(--color-bright-yellow));
+    }
+    90% {
+        /* Subtle end-of-cycle pulse */
+        filter: drop-shadow(0 0 20px var(--color-electric-blue));
+    }
+}
+
+
+/* 2. Text Styling (Neon Glow) */
+.content .logo-title {
+    font-size: 3rem; 
+    color: white;
+    text-shadow: 
+        0 0 7px rgba(255, 255, 255, 0.8), 
+        0 0 15px var(--color-neon-blue), 
+        0 0 25px var(--color-electric-blue); 
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    transition: all 0.4s ease;
+}
+
+.content .logo-title:hover {
+    color: var(--color-lime-yellow);
+    text-shadow: 
+        0 0 5px var(--color-bright-yellow),
+        0 0 20px var(--color-lime-yellow),
+        0 0 35px var(--color-circuit-teal); 
+}
+
+.content .logo-subtitle {
+    font-size: 1.4rem; 
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 40px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* 3. Call to Action Button Styling */
+.cta-button {
+    display: inline-block;
+    padding: 15px 35px;
+    border: 2px solid var(--color-neon-blue);
+    background: rgba(0, 229, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+}
+
+.cta-button:hover {
+    background: var(--color-neon-blue);
+    color: var(--color-dark-navy);
+    border-color: white;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--color-neon-blue), 0 0 40px var(--color-electric-blue);
+}
+
+/* 4. Responsive Adjustments for Content */
+@media (max-width: 1200px) {
+    .content .main-logo {
+        width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content .main-logo {
+        width: 300px;
+    }
+    
+    .content .logo-title {
+        font-size: 2.5rem;
+    }
+    
+    .content .logo-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .content .main-logo {
+        width: 250px;
+    }
+    
+    .content .logo-title {
+        font-size: 2rem;
+    }
+    
+    .content .logo-subtitle {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,234 @@
+/* ==========================================================================
+   FINALIZED BACKGROUND STYLES (background.css)
+   ========================================================================== */
+
+/* GAMEZ Color Palette (Consolidated) */
+:root {
+    --color-neon-blue: #00E5FF;
+    --color-electric-blue: #1A9FFF;
+    --color-dark-navy: #0A0F1F;
+    --color-bright-yellow: #FFD93D;
+    --color-lime-yellow: #C7FF34;
+    --color-circuit-teal: #28D7C0;
+}
+
+/* Reset & Base */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    /* Background color set to dark navy from the color palette */
+    background: var(--color-dark-navy); 
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* 1. Main Background Container */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1; /* Keep it below content and overlays */
+}
+
+/* 2. Scrolling Track (For Seamless Animation) */
+.scrolling-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300vh; /* Triple height for perfect loop (100% * 3) */
+    display: flex;
+    flex-direction: column;
+    animation: scrollBackground 150s linear infinite;
+    will-change: transform; /* Performance optimization */
+}
+
+/* Each row contains all 30 images */
+.image-row {
+    flex: 1; /* Makes each row take up 1/3 of the track height */
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 10px;
+    padding: 8px;
+}
+
+/* 3. Image Tiles */
+.image-tile {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 
+        0 3px 10px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.image-tile:hover {
+    opacity: 0.9;
+    transform: scale(1.08);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(0, 229, 255, 0.4),
+        0 0 20px rgba(0, 229, 255, 0.3); /* Neon blue hover glow */
+    z-index: 10;
+}
+
+/* 4. Seamless Animation Keyframes */
+@keyframes scrollBackground {
+    0% {
+        transform: translateY(0);
+    }
+    /* Moves the track up exactly 2/3 of its height (200vh) to reset the loop */
+    100% {
+        transform: translateY(-66.666%); 
+    }
+}
+
+/* 5. Netflix-style Overlays (Dark Edges) */
+.overlay {
+    position: fixed;
+    pointer-events: none;
+    z-index: 2; /* Sits between the background (z-index 1) and content (z-index 3) */
+}
+
+.overlay-top {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(
+        to bottom,
+        var(--color-dark-navy) 0%,
+        rgba(10, 15, 31, 0.9) 20%,
+        rgba(10, 15, 31, 0.6) 50%,
+        rgba(10, 15, 31, 0.2) 80%,
+        transparent 100%
+    );
+}
+
+.overlay-bottom {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(
+        to top,
+        var(--color-dark-navy) 0%,
+        rgba(10, 15, 31, 0.9) 30%,
+        rgba(10, 15, 31, 0.5) 60%,
+        transparent 100%
+    );
+}
+
+.overlay-sides {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(10, 15, 31, 0.8) 0%,
+        transparent 15%,
+        transparent 85%,
+        rgba(10, 15, 31, 0.8) 100%
+    );
+}
+
+/* 6. Content Layer (Where your logo/UI goes) */
+.content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Logo Styles */
+.content .main-logo {
+    max-width: 90%;
+    width: 500px; 
+    height: auto;
+    margin-bottom: 20px;
+    /* Use neon blue for main glow and bright yellow for secondary accent */
+    filter: drop-shadow(0 0 15px var(--color-neon-blue)) drop-shadow(0 0 5px var(--color-bright-yellow));
+}
+
+.content .logo-title {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    margin-bottom: 10px;
+}
+
+.content .logo-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* 7. Responsive Adjustments */
+@media (max-width: 1200px) {
+    .image-row {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 8px;
+        padding: 6px;
+    }
+    .content .main-logo {
+        width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .image-row {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 6px;
+        padding: 5px;
+    }
+    
+    .content .main-logo {
+        width: 300px;
+    }
+    
+    .content .logo-title {
+        font-size: 2rem;
+    }
+    
+    .content .logo-subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-row {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+        padding: 4px;
+    }
+    
+    .overlay-top { height: 150px; }
+    .overlay-bottom { height: 200px; }
+    
+    .content .main-logo {
+        width: 250px;
+    }
+}
